@@ -1,31 +1,76 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication4", "ConsoleApplication4\ConsoleApplication4.vcxproj", "{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Debug|x64.ActiveCfg = Debug|x64
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Debug|x64.Build.0 = Debug|x64
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Debug|x86.ActiveCfg = Debug|Win32
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Debug|x86.Build.0 = Debug|Win32
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Release|x64.ActiveCfg = Release|x64
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Release|x64.Build.0 = Release|x64
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Release|x86.ActiveCfg = Release|Win32
-		{F02EC014-83B6-4D63-8B88-4C3DC2E3A561}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DDE0C0DE-6927-4131-998B-5AF6CF858271}
-	EndGlobalSection
-EndGlobal
+// ConsoleApplication4.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//this program transcribe DNA molecues and deltes white spaces betweeen string array inputs.
+//wriiten by Brian L. Allen II
+
+#include "pch.h"
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+string DNAtoRNA(string &str);				//FUNCTION PROTOTYPE
+int main()
+{
+	string DNAInput;
+	cout << "Enter DNA sequence in upper case values..."<<endl<<endl;
+	getline(cin, DNAInput);
+	string output =DNAtoRNA(DNAInput);
+	cout << endl << output;
+	
+	
+}
+
+
+string DNAtoRNA(string &str)
+{			///transcription occuring//
+
+																						
+		int i = 0, len, j;
+		len = str.length();
+		for (i = 0; i < len; i++)
+		{
+			if (str[i] == ' ')
+			{
+				for (j = i; j < len; j++)
+				{
+					str[j] = str[j + 1];
+				}
+				len--;
+			}
+		}
+		for (i = 0; i < len; i++)
+		{
+			for (int j = 33; j <= 63; j ++)
+			{
+
+				if (str[i] == j)
+				{
+					return "error";
+				}
+		
+			}
+		}
+
+		///transcribing the new array of dna sequences
+		for (int i = 0; i < str.length(); i++) {
+			if (str[i] == 'A') {
+				str[i] = 'U';
+			}
+			else if (str[i] == 'C') {
+				str[i] = 'G';
+			}
+			else if (str[i] == 'G') {
+				str[i] = 'C';
+			}
+			else if (str[i] == 'T') {
+				str[i] = 'A';
+			}
+
+		}
+
+
+		return  str;
+
+
+		
+}
